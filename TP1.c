@@ -2,8 +2,13 @@
 
 //1: Declaracion de funciones
 int lenght(char* cadena){
-
+    int i=0;
+    while(cadena[i]!='\0'){
+        i++;
+    }
+    return i;
 } //a:Calcular y retornar la longitud de una cadena dada.
+    
 
 int toInt(char* cadena){
 
@@ -33,17 +38,17 @@ int main(){ //2: Testeo de funciones
     char cadenaNumeros[]="91218";
     int num=toInt(cadenaNumeros);//b
 
-    char cadenaNueva[]=toUpper(cadena);//c
+    char* cadenaNueva=toUpper(cadena);//c
 
-    char cadenaMod[]=deleteChar(cadena,'u');//d
+    char* cadenaMod=deleteChar(cadena,'u');//d
 
     char cadena2[]="Gonzalo Martinez";
-    char cadena3[]=concat(cadena,cadena2);//e
+    char* cadena3=concat(cadena,cadena2);//e
 
-    char nuevaCadena[]=insertChar(cadena,'9',13);//f
+    char* nuevaCadena=insertChar(cadena,'9',13);//f
 
     //Impresion de las cadenas...
-    
+    printf("%d",longitud);
 
     return 0;
 }
