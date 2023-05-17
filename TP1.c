@@ -30,14 +30,41 @@ char* toUpper(char* cadena){
 } //c:Convertir una cadena de caracteres a la misma cadena con todos sus caracteres en mayúscula. 
 
 char* deleteChar(char* cadena,char caracter){
-
+   
 }//d:Eliminar de una cadena dada todas las ocurrencias de un carácter dado. 
 
-char* concat(char* cadena1,char* cadena2){
+char* concat(char* destino,char* origen){
+    int lenD=0;
+    while (destino[lenD] != '\0') {
+        lenD++;
+    }
+    
+    int lenO=0;
+    
+    while (origen[lenO] != '\0') {
+        destino[lenD + lenO] = origen[lenO];
+        lenO++;
+    }
+
+    destino[lenD + lenO] = '\0';
 
 }//e:Concatenar al final de la primera cadena dada una segunda cadena también dada.
 
 char* insertChar(char* cadena,char caracter,int pos){
+    int len = 0;
+    while (cadena[len] != '\0') {
+        len++;
+    } //Calculo la longitud de la cadena
+
+    if (pos < 0 || pos > len) { //Verifico si la posicion es valida
+        printf("Posición inválida\n");
+        return;
+    }
+
+    for (int i = len; i >= pos; i--) {
+        cadena[i+1] = cadena[i];
+    }
+    cadena[pos] = caracter;
 
 }//f:Modificar la cadena dada con la inserción de un carácter dado en una posición determinada. 
 
