@@ -2,6 +2,8 @@
 #include <ctype.h> //Si se uso en un ejemplo, supongo que se puede usar en el ejercicio
 
 // 1: Declaracion de funciones
+
+// A) Calcular y retornar la longitud de una cadena dada.
 int lenght(char *cadena)
 {
     int i = 0;
@@ -12,6 +14,8 @@ int lenght(char *cadena)
     return i;
 } // a:Calcular y retornar la longitud de una cadena dada.
 
+
+// B) Convertir una cadena de dígitos en su equivalente numérico.
 int toInt(char *cadena)
 {
     int i = 0;
@@ -22,93 +26,99 @@ int toInt(char *cadena)
         i++;
     }
     return num;
-} // b:Convertir una cadena de dígitos en su equivalente numérico.
+}
 
-char *toUpper(char *cadena)
-{
+// C) Convertir una cadena de caracteres a la misma cadena con todos sus caracteres en mayúscula.
+void toUpper(char* cadena) {
     int i = 0;
-    while (cadena[i] != '\0')
-    {
-        cadena[i] = toupper(cadena[i]);
-        i++;
-    }
-    return cadena;
-} // c:Convertir una cadena de caracteres a la misma cadena con todos sus caracteres en mayúscula.
 
-char *deleteChar(char *cadena, char caracter)
-{
-    int i = 0;
-    int j = 0;
-    while (cadena[i] != '\0')
-    {
-        if (cadena[i] != caracter)
-        {
-            cadena[j] = cadena[i];
-            j++;
+    while (cadena[i] != '\0') {
+        if ((unsigned char)cadena[i] >= 0xC3 && (unsigned char)cadena[i] <= 0xDF) {
+            cadena[i + 1] = cadena[i + 1] - 32;
         }
         i++;
     }
-    cadena[j] = '\0';
-    return cadena;
-} // d:Eliminar de una cadena dada todas las ocurrencias de un carácter dado.
+}
 
-char *concat(char *destino, char *origen)
-{
+// D) Eliminar de una cadena dada todas las ocurrencias de un carácter dado.
+
+void eliminarCaracter(char* cadena, char caracter) {
+    int i, j;
+    for (i = 0, j = 0; cadena[i] != '\0'; i++) {
+        if (cadena[i] != caracter) {
+            cadena[j++] = cadena[i];
+        }
+    }
+
+    cadena[j] = '\0';
+}
+
+// E) Concatenar al final de la primera cadena dada una segunda cadena también dada.
+void concatenarCadenas(char* cadena1, const char* cadena2) {
     int i = 0;
     int j = 0;
-    while (destino[i] != '\0')
-    {
+
+    while (cadena1[i] != '\0') {
         i++;
     }
-    while (origen[j] != '\0')
-    {
-        destino[i] = origen[j];
+
+    while (cadena2[j] != '\0') {
+        cadena1[i] = cadena2[j];
         i++;
         j++;
     }
-    destino[i] = '\0';
-    return destino;
-} // e:Concatenar al final de la primera cadena dada una segunda cadena también dada.
 
-char *insertChar(char *cadena, char caracter, int posicion)
-{
-    int i = 0;
-    while (cadena[i] != '\0')
-    {
-        i++;
+    cadena1[i] = '\0';
+}
+
+
+// F) Modificar la cadena dada con la inserción de un carácter dado en una posición determinada.
+void insertarCaracter(char* cadena, char caracter, int posicion) {
+    int i;
+    int longitud = 0;
+
+    // Calcular la longitud de la cadena
+    while (cadena[longitud] != '\0') {
+        longitud++;
     }
-    while (i >= posicion)
-    {
+
+    // Desplazar los caracteres hacia la derecha a partir de la posición deseada
+    for (i = longitud; i >= posicion; i--) {
         cadena[i + 1] = cadena[i];
-        i--;
     }
+
+    // Insertar el carácter en la posición deseada
     cadena[posicion] = caracter;
-    return cadena;
-} // f:Modificar la cadena dada con la inserción de un carácter dado en una posición determinada.
+}
 
 int main()
 { // 2: Testeo de funciones
-    char cadena[] = "Miguel Borja";
+    char cadena[] = "Sintaxis y Semantica de los Lenguajes";
     int longitud = lenght(cadena); // a
 
     char cadenaNumeros[] = "91218";
     int num = toInt(cadenaNumeros); // b
 
-    char *cadenaNueva = toUpper(cadena); // c
+    char toUpperCadena[] = "hola";
+    toUpper(toUpperCadena); // c
 
-    char *cadenaMod = deleteChar(cadena, 'u'); // d
+    char cadenaMod[] = "hola mundo";
+    eliminarCaracter(cadenaMod, 'o'); // d
 
-    char cadena2[] = "Gonzalo Martinez";
-    char *cadena3 = concat(cadena, cadena2); // e
 
-    char *nuevaCadena = insertChar(cadena, '9', 13); // f
+    char cadena1[] = "hola";
+    char cadena2[] = "mundo";
+    concatenarCadenas(cadena1, cadena2); // e
+
+    char nuevaCadena[] = "hola mundo";
+    insertarCaracter(nuevaCadena, '!', 4); // f
 
     // Impresion de las cadenas...
     printf("%d\n", longitud);    // a
     printf("%d\n", num);         // b
-    printf("%s\n", cadenaNueva); // c
+    printf("%s\n", toUpperCadena); // c
     printf("%s\n", cadenaMod);   // d
-    printf("%s\n", cadena3);     // e
+    printf("%s\n", cadena1);     // e
     printf("%s\n", nuevaCadena); // f
     return 0;
 }
