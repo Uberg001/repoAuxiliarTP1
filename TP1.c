@@ -29,17 +29,15 @@ int toInt(char *cadena)
 }
 
 // C) Convertir una cadena de caracteres a la misma cadena con todos sus caracteres en mayúscula.
-void toUpper(char* cadena) {
+void toUpper (char *cadena){
     int i = 0;
-
     while (cadena[i] != '\0') {
-        if ((unsigned char)cadena[i] >= 0xC3 && (unsigned char)cadena[i] <= 0xDF) {
-            cadena[i + 1] = cadena[i + 1] - 32;
+        if (cadena[i] >= 'a' && cadena[i] <= 'z') {
+                cadena[i] = cadena[i] - ('a' - 'A');//Al ASCII de cadena[i] le resto el ASCII que hay entre 'a' y 'A'. Eso me devuelve el ASCII de 'A'
         }
         i++;
     }
 }
-
 // D) Eliminar de una cadena dada todas las ocurrencias de un carácter dado.
 
 void eliminarCaracter(char* cadena, char caracter) {
